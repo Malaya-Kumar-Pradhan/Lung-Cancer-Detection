@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lung Cancer Detector</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/style.css') }}">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Lung Cancer Detector</h2>
+        <form action="/predict" method="post">
+            <div class="input-group">
+                <label for="age">Age:</label>
+                <input type="number" name="age" min="1" max="120" required>
+            </div>
+            <div class="input-group">
+                <label for="gender">Gender:</label>
+                <select name="gender" id="gender" required>
+                    <option value="" disabled selected>Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="country">Country:</label>
+                <input list="countries" name="country" id="country" placeholder="Type to search..." required>
+                <datalist id="countries">
+                    <option value="Sweden">Sweden</option>
+                    <option value="Netherlands">Netherlands</option>
+                    <option value="Hungary">Hungary</option>
+                    <option value="Belgium">Belgium</option>
+                    <option value="Luxembourg">Luxembourg</option>
+                    <option value="Italy">Italy</option>
+                    <option value="Croatia">Croatia</option>
+                    <option value="Denmark">Denmark</option>
+                    <option value="Malta">Malta</option>
+                    <option value="Germany">Germany</option>
+                    <option value="Poland">Poland</option>
+                    <option value="Ireland">Ireland</option>
+                    <option value="Romania">Romania</option>
+                    <option value="Spain">Spain</option>
+                    <option value="Greece">Greece</option>
+                    <option value="Estonia">Estonia</option>
+                    <option value="Cyprus">Cyprus</option>
+                    <option value="France">France</option>
+                    <option value="Slovenia">Slovenia</option>
+                    <option value="Latvia">Latvia</option>
+                    <option value="Portugal">Portugal</option>
+                    <option value="Austria">Austria</option>
+                    <option value="Czech Republic">Czech Republic</option>
+                    <option value="Finland">Finland</option>
+                    <option value="Lithuania">Lithuania</option>
+                    <option value="Slovakia">Slovakia</option>
+                    <option value="Bulgaria">Bulgaria</option>
+                </datalist>
+            </div>
+            <div class="input-group">
+                <label for="diagnosis_date">Diagnosis Date:</label>
+                <input type="date" name="diagnosis_date" required>
+            </div>
+            <div class="input-group">
+                <label for="cancer_stage">Cancer Stage:</label>
+                <select name="cancer_stage" id="cancer_stage">
+                    <option value="" disabled selected>Select Stage</option>
+                    <option value="Stage I">Stage I</option>
+                    <option value="Stage II">Stage II</option>
+                    <option value="Stage III">Stage III</option>
+                    <option value="Stage IV">Stage IV</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="family_history">Family History:</label>
+                <select name="family_history" id="family_history">
+                    <option value="" disabled selected>Select Yes/No</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="smoking_status">Smoking Status:</label>
+                <select name="smoking_status" id="smoking_status">
+                    <option value="" disabled selected>Select Smoke Status</option>
+                    <option value="Passive Smoker">Passive Smoker</option>
+                    <option value="Former Smoker">Former Smoker</option>
+                    <option value="Never Smoked">Never Smoked</option>
+                    <option value="Current Smoker">Current Smoker</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="bmi">BMI:</label>
+                <input type="number" name="bmi" step="0.1" required>
+            </div>
+            <div class="input-group">
+                <label for="cholesterol_level">Cholesterol Level:</label>
+                <input type="number" name="cholesterol_level" required>
+            </div>
+            <div class="input-group">
+                <label for="hypertension">Hypertension (Yes=1, No=0):</label>
+                <input type="number" name="hypertension" min="0" max="1" required>
+            </div>
+            <div class="input-group">
+                <label for="asthma">Asthma (Yes=1, No=0):</label>
+                <input type="number" name="asthma" min="0" max="1" required>
+            </div>
+            <div class="input-group">
+                <label for="cirrhosis">Cirrhosis (Yes=1, No=0):</label>
+                <input type="number" name="cirrhosis" min="0" max="1" required>
+            </div>
+            <div class="input-group">
+                <label for="other_cancer">Other Cancer (Yes=1, No=0):</label>
+                <input type="number" name="other_cancer" min="0" max="1" required>
+            </div>
+            <div class="input-group">
+                <label for="treatment_type">Treatment Type:</label>
+                <select name="treatment_type" id="treatment_type">
+                    <option value="" disabled selected>Select Treatment Type</option>
+                    <option value="Chemotherapy">Chemotherapy</option>
+                    <option value="Surgery">Surgery</option>
+                    <option value="Combined">Combined</option>
+                    <option value="Radiation">Radiation</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="end_treatment_date">End Treatment Date:</label>
+                <input type="date" name="end_treatment_date" required>
+            </div>
+            <input type="submit" value="Analyze Results">
+        </form>
+
+        {% if prediction_text %}
+        <div class="result">
+            {{ prediction_text }}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
